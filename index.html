@@ -46,6 +46,13 @@ button{font:inherit;cursor:pointer}
 .skip{position:absolute;right:12px;top:-60px;background:var(--navy);color:#fff;padding:10px 14px;border-radius:10px;z-index:20;font-weight:700}
 .skip:focus{top:12px}
 
+/* hello */
+.hello{position:relative;z-index:2;margin-top:-28px;padding:18px 20px;display:flex;gap:18px;align-items:center}
+.hello img{flex:0 0 auto;width:96px;height:96px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 0 0 3px var(--o2)}
+.hello h2{font-size:24px;color:var(--navy);margin-bottom:4px}
+.hello p{margin:0;color:var(--muted)}
+@media(max-width:560px){.hello{flex-direction:column;text-align:center;gap:10px}.hello img{width:88px;height:88px;margin-top:-52px}}
+
 /* quick nav */
 .jump{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:16px 0 4px;margin:0 -16px;padding-inline:16px}
 .jump::-webkit-scrollbar{display:none}
@@ -275,6 +282,14 @@ footer small a{color:var(--navy);font-weight:700}
 </div>
 
 <main class="wrap" id="main">
+
+  <div class="card hello">
+    <img src="sivan.jpg" alt="סיון דרמון" width="480" height="480">
+    <div>
+      <h2>היי, כאן סיון 🤍</h2>
+      <p>שמחה שאת פה. סידרתי לך בדף הזה את כל מה שיש במועדון, כדי שלא תצטרכי לחפש. ותאחלס, הסוד הוא לא לראות הכל בבת אחת. בוחרות שיעור אחד, מיישמות, ובאות לספר לי בקבוצה איך הלך.</p>
+    </div>
+  </div>
 
   <nav class="jump" aria-label="קפיצה מהירה">
     <a href="#news">מה חדש</a>
