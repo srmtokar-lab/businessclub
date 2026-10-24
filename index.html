@@ -6,7 +6,11 @@
 <title>הביזנס קלאב | אזור החברות</title>
 <meta name="description" content="כל התכנים, העדכונים והלייבים של מועדון הביזנס קלאב במקום אחד">
 <meta name="robots" content="noindex, nofollow">
-<link rel="icon" href="logo.png">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#053F75">
+<meta name="apple-mobile-web-app-title" content="ביזנס קלאב">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Suez+One&family=Assistant:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -34,6 +38,58 @@ button{font:inherit;cursor:pointer}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:12px;padding-bottom:12px}
 .top img{height:44px;width:auto}
 .tag{font-weight:700;font-size:14px;color:var(--navy);background:#fff;border:1px solid var(--line);padding:6px 12px;border-radius:999px;white-space:nowrap}
+.top-end{display:flex;align-items:center;gap:8px}
+.size{display:flex;border:1px solid var(--line);border-radius:999px;background:#fff;overflow:hidden}
+.size button{border:0;background:none;color:var(--navy);font-weight:800;font-size:15px;padding:6px 11px}
+.size button+button{border-inline-start:1px solid var(--line)}
+@media(max-width:420px){.top .tag{display:none}}
+.skip{position:absolute;right:12px;top:-60px;background:var(--navy);color:#fff;padding:10px 14px;border-radius:10px;z-index:20;font-weight:700}
+.skip:focus{top:12px}
+
+/* quick nav */
+.jump{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:16px 0 4px;margin:0 -16px;padding-inline:16px}
+.jump::-webkit-scrollbar{display:none}
+.jump a{flex:0 0 auto;text-decoration:none;font-weight:700;font-size:15px;color:var(--navy);background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:8px 14px}
+.jump a:hover{border-color:var(--navy)}
+
+/* checklist */
+.check{padding:20px 22px;margin-bottom:16px}
+.check ol{margin:0;padding:0;list-style:none;counter-reset:c;display:grid;gap:12px}
+.check li{display:flex;gap:12px;align-items:flex-start}
+.check li::before{counter-increment:c;content:counter(c);flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:800;font-size:15px}
+.check li a{color:var(--navy);font-weight:700}
+.check .hide-btn{margin-top:14px;background:none;border:0;color:var(--muted);text-decoration:underline;text-underline-offset:3px;padding:4px 0;font-size:15px}
+.check-done{display:none}
+.checked .check{display:none}
+.checked .check-done{display:block;margin-bottom:12px;color:var(--muted);font-size:15px}
+.checked .check-done button{background:none;border:0;color:var(--navy);font-weight:700;text-decoration:underline;padding:0}
+
+/* updates as accordion */
+details.update{display:block;padding:0;border-bottom:1px dashed var(--line)}
+details.update:last-child{border-bottom:0}
+details.update summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start;padding:16px 20px}
+details.update summary::-webkit-details-marker{display:none}
+details.update summary::after{content:"+";font-weight:800;color:var(--navy);font-size:20px;line-height:1}
+details.update[open] summary::after{content:"−"}
+details.update .body{padding:0 46px 16px 20px}
+details.older>summary{padding:14px 20px;color:var(--navy);font-weight:700;cursor:pointer}
+.cal{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.cal a{font-size:14px;font-weight:700;color:#fff;text-decoration:none;border:1.5px solid rgba(255,255,255,.4);border-radius:10px;padding:7px 12px}
+
+/* help */
+.faq{padding:6px 0}
+.faq details{border-bottom:1px dashed var(--line)}
+.faq details:last-child{border-bottom:0}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:12px;padding:16px 20px;font-weight:800;font-size:17.5px;color:var(--ink)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--navy);font-size:20px;line-height:1}
+.faq details[open] summary::after{content:"−"}
+.faq .a{padding:0 20px 18px;color:var(--muted)}
+.faq .a p{margin:0 0 8px}
+.faq .a ol{margin:0 0 8px;padding-inline-start:20px}
+.faq .a b{color:var(--ink)}
+.faq .a a{color:var(--navy);font-weight:700}
+.help-cta{margin-top:14px}
 
 /* hero */
 .hero{position:relative;overflow:hidden;background:var(--navy);color:#fff;padding:44px 0 56px}
@@ -173,8 +229,11 @@ mark{background:#ffe2c4;color:inherit;border-radius:4px;padding:0 2px}
 @media(min-width:760px){.help{grid-template-columns:1fr auto}}
 .help h3{font-family:"Assistant";font-weight:800;font-size:21px;color:var(--navy)}
 .help p{margin:4px 0 0;color:var(--muted)}
-footer{padding:40px 0 56px;text-align:center;color:var(--muted)}
-footer .sign{font-family:"Suez One",serif;font-size:24px;color:var(--navy);margin-bottom:6px}
+footer{padding:44px 0 56px;text-align:center;color:var(--muted)}
+footer .quote{font-family:"Suez One",serif;font-size:clamp(22px,4vw,30px);color:var(--navy);max-width:24ch;margin:0 auto 14px;line-height:1.3}
+footer .sign{font-weight:800;font-size:18px;color:var(--o3);margin-bottom:14px}
+footer small{display:block;font-size:14px;margin-top:6px}
+footer small a{color:var(--navy);font-weight:700}
 
 /* motion */
 .rise{opacity:0;transform:translateY(14px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
@@ -185,10 +244,17 @@ footer .sign{font-family:"Suez One",serif;font-size:24px;color:var(--navy);margi
 </head>
 <body>
 
+<a class="skip" href="#main">דלגי לתוכן</a>
 <header class="top">
   <div class="wrap">
     <img src="logo.png" alt="סיון דרמון" width="740" height="155">
-    <span class="tag">אזור חברות המועדון</span>
+    <div class="top-end">
+      <span class="tag">אזור חברות המועדון</span>
+      <div class="size" role="group" aria-label="גודל טקסט">
+        <button type="button" id="smaller" aria-label="הקטנת טקסט">א-</button>
+        <button type="button" id="bigger" aria-label="הגדלת טקסט">א+</button>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -208,7 +274,15 @@ footer .sign{font-family:"Suez One",serif;font-size:24px;color:var(--navy);margi
   </div>
 </div>
 
-<main class="wrap">
+<main class="wrap" id="main">
+
+  <nav class="jump" aria-label="קפיצה מהירה">
+    <a href="#news">מה חדש</a>
+    <a href="#start">מאיפה מתחילות</a>
+    <a href="#materials">חוברות</a>
+    <a href="#library">כל התכנים</a>
+    <a href="#help">עזרה</a>
+  </nav>
 
   <section id="results" class="results" aria-live="polite">
     <div class="sec-head"><div><h2>מה מצאתי</h2><p id="resCount"></p></div></div>
@@ -230,7 +304,17 @@ footer .sign{font-family:"Suez One",serif;font-size:24px;color:var(--navy);margi
     </section>
 
     <section id="start">
-      <div class="sec-head"><div><h2>חדשה פה? תתחילי מכאן</h2><p>שלושה צעדים ראשונים, לפי הסדר</p></div></div>
+      <div class="sec-head"><div><h2>חדשה פה? תתחילי מכאן</h2><p>כמה דקות של סידור, ואז ישר ללמוד</p></div></div>
+      <div class="card check">
+        <ol>
+          <li><span>היכנסי ל<a id="schoolLink2" target="_blank" rel="noopener">מערכת הקורסים</a> עם המייל והסיסמה שקיבלת כשהצטרפת.</span></li>
+          <li><span>שמרי את הדף הזה על מסך הבית בטלפון, ככה הכל תמיד אצלך. <a href="#faq-save" data-open="faq-save">איך עושים את זה?</a></span></li>
+          <li><span>הצטרפי ל<a id="waLink2" target="_blank" rel="noopener">קבוצת הוואטסאפ</a> של המועדון.</span></li>
+          <li><span>תתחילי מאחד משלושת הקורסים כאן למטה. לאט, אחד אחד. לא צריך הכל ביום אחד.</span></li>
+        </ol>
+        <button type="button" class="hide-btn" id="hideCheck">כבר עשיתי את זה, אפשר להסתיר</button>
+      </div>
+      <div class="check-done">הסתרת את רשימת הצעדים. <button type="button" id="showCheck">להציג שוב</button></div>
       <div class="steps" id="steps"></div>
     </section>
 
@@ -246,18 +330,53 @@ footer .sign{font-family:"Suez One",serif;font-size:24px;color:var(--navy);margi
     </section>
   </div>
 
-  <div class="card help">
-    <div>
-      <h3>לא מצליחה להיכנס לקורס?</h3>
-      <p>התכנים נמצאים במערכת הקורסים, עם המייל והסיסמה שקיבלת כשהצטרפת. אם שכחת סיסמה, יש במסך הכניסה אפשרות לאפס אותה.</p>
+  <section id="help">
+    <div class="sec-head"><div><h2>צריכה עזרה?</h2><p>התשובות לשאלות שהכי שואלים</p></div></div>
+    <div class="card faq">
+      <details id="faq-login">
+        <summary>איך נכנסים לקורסים?</summary>
+        <div class="a">
+          <p>כל התכנים נמצאים במערכת הקורסים. לוחצים על "לצפייה" ליד קורס, או על הכפתור כאן למטה, ונכנסים עם המייל והסיסמה שקיבלת כשהצטרפת למועדון.</p>
+          <p>אחרי שנכנסת פעם אחת מהטלפון, בדרך כלל לא צריך להתחבר שוב.</p>
+        </div>
+      </details>
+      <details id="faq-pass">
+        <summary>שכחתי את הסיסמה</summary>
+        <div class="a"><p>במסך הכניסה של מערכת הקורסים יש אפשרות לאיפוס סיסמה. מקלידים את המייל שאיתו נרשמת, ומקבלים מייל עם סיסמה חדשה. לא הגיע? כדאי להציץ גם בתיקיית הספאם.</p></div>
+      </details>
+      <details id="faq-files">
+        <summary>איפה החוברות והצ'קליסטים?</summary>
+        <div class="a"><p>כל חוברת נמצאת בתוך השיעור שלה, מתחת לסרטון, תחת "קבצים מצורפים". את כולן ריכזתי לך גם ב<a href="#materials">חלק של החוברות</a>.</p></div>
+      </details>
+      <details id="faq-save">
+        <summary>איך שומרים את הדף על מסך הבית בטלפון?</summary>
+        <div class="a">
+          <p><b>באייפון</b></p>
+          <ol><li>פותחים את הדף בספארי.</li><li>לוחצים על כפתור השיתוף (ריבוע עם חץ למעלה).</li><li>בוחרים "הוספה למסך הבית" ולוחצים "הוסף".</li></ol>
+          <p><b>באנדרואיד</b></p>
+          <ol><li>פותחים את הדף בכרום.</li><li>לוחצים על שלוש הנקודות למעלה.</li><li>בוחרים "הוספה למסך הבית" ומאשרים.</li></ol>
+          <p>מעכשיו הדף יופיע אצלך בטלפון כמו אפליקציה, עם אייקון של המועדון.</p>
+        </div>
+      </details>
+      <details id="faq-wa">
+        <summary>איך מצטרפים לקבוצת הוואטסאפ?</summary>
+        <div class="a"><p>הקישור לקבוצה נמצא בתוך מערכת הקורסים, כדי שרק חברות המועדון יוכלו להגיע אליו. <a id="waLink3" target="_blank" rel="noopener">לחצי כאן</a>, התחברי, ותמצאי שם כפתור הצטרפות.</p></div>
+      </details>
+      <details id="faq-size">
+        <summary>איך מגדילים את הטקסט בדף?</summary>
+        <div class="a"><p>בראש הדף יש שני כפתורים: "א+" מגדיל את הטקסט ו"א-" מקטין אותו. הדף זוכר את הבחירה שלך לפעם הבאה.</p></div>
+      </details>
     </div>
-    <a class="btn btn-n" id="schoolLink" target="_blank" rel="noopener">לכניסה למערכת הקורסים</a>
-  </div>
+    <div class="help-cta"><a class="btn btn-n" id="schoolLink" target="_blank" rel="noopener">לכניסה למערכת הקורסים</a></div>
+  </section>
 </main>
 
 <footer>
+  <div class="quote">"זה תהליך ויש דרך. אין לי גלולת קסם."</div>
   <div class="sign">באהבה, סיון</div>
   <div>הביזנס קלאב · סיון דרמון</div>
+  <small>כדאי לשמור את הדף בטלפון. <a href="#faq-save" data-open="faq-save">איך עושים את זה?</a></small>
+  <small id="lastUpdated"></small>
 </footer>
 
 <script>
@@ -270,21 +389,27 @@ const SCHOOL = "https://my.schooler.biz/s/101498/bundles";
 // הקבוצה בוואטסאפ: הקישור עצמו נמצא בתוך שיעור ב-Skooler, כדי שרק חברות מחוברות יגיעו אליו
 const WHATSAPP_LESSON = "https://my.schooler.biz/s/101498/1753217342985/nDMCYo8";
 
-// עדכונים חשובים. החדש למעלה. link הוא רשות.
+// מתי הדף עודכן לאחרונה (מופיע בתחתית הדף)
+const LAST_UPDATED = "25.10.2026";
+
+// עדכונים חשובים. החדש למעלה. link הוא רשות. שלושת הראשונים מוצגים, השאר נכנסים ל"עדכונים קודמים".
 const UPDATES = [
   {
-    date: "אוקטובר 2026",
+    date: "25.10.2026",
     title: "יש לנו בית חדש לכל התכנים",
-    text: "מעכשיו כל מה שיש במועדון מסודר בדף הזה לפי נושאים. שמרי אותו במועדפים או על מסך הבית בטלפון, ככה הוא תמיד אצלך ביד."
+    text: "מעכשיו כל מה שיש במועדון מסודר בדף הזה לפי נושאים, כולל חיפוש בתוך כל השיעורים. שמרי אותו על מסך הבית בטלפון, ככה הוא תמיד אצלך ביד."
   }
 ];
 
 // הלייב הבא. אם אין לייב קבוע, משאירים title ריק ויופיע "בקרוב".
+// start בפורמט "2026-11-03T20:00" מוסיף כפתורים ליומן גוגל ולאייפון. minutes = כמה זמן הלייב.
 const LIVE = {
   title: "",
   when: "",
   text: "",
-  link: ""
+  link: "",
+  start: "",
+  minutes: 60
 };
 
 // "חדשה פה? תתחילי מכאן"
@@ -413,30 +538,49 @@ const MATERIALS = COURSES.flatMap(c => c.files.map(i => ({...i, course:c})));
 
 // stats
 const totalSec = COURSES.reduce((a,c)=>a+c.sec,0);
-const totalLessons = COURSES.reduce((a,c)=>a+c.items.length,0);
+const totalLessons = COURSES.reduce((a,c)=>a+c.items.filter(i=>i.d||i.f).length,0);
 $("#stats").innerHTML = [
   [COURSES.length, "קורסים והרצאות"],
   [totalLessons, "שיעורים"],
   [Math.floor(totalSec/3600)+"+", "שעות של ידע"]
 ].map(([b,s])=>`<div class="stat"><b dir="ltr">${b}</b><span>${s}</span></div>`).join("");
-$("#schoolLink").href = SCHOOL;
-$("#waLink").href = WHATSAPP_LESSON;
+["#schoolLink","#schoolLink2"].forEach(s => $(s).href = SCHOOL);
+["#waLink","#waLink2","#waLink3"].forEach(s => $(s).href = WHATSAPP_LESSON);
+$("#lastUpdated").textContent = "הדף עודכן לאחרונה ב-" + LAST_UPDATED;
 
 // updates
-$("#updates").innerHTML = UPDATES.length ? UPDATES.map(u=>`
-  <div class="update"><span class="dot"></span><div>
-    <div class="meta">${esc(u.date||"")}</div>
-    <h3>${esc(u.title)}</h3><p>${esc(u.text||"")}</p>
-    ${u.link?`<a class="more" href="${esc(u.link)}" target="_blank" rel="noopener">לפרטים ←</a>`:""}
-  </div></div>`).join("") : `<div class="empty">אין עדכונים חדשים כרגע</div>`;
+const updateItem = (u, open) => `
+  <details class="update"${open?" open":""}>
+    <summary><span class="dot"></span><span><span class="meta">${esc(u.date||"")}</span><h3>${esc(u.title)}</h3></span></summary>
+    <div class="body"><p>${esc(u.text||"")}</p>
+    ${u.link?`<a class="more" href="${esc(u.link)}" target="_blank" rel="noopener">לפרטים ←</a>`:""}</div>
+  </details>`;
+$("#updates").innerHTML = UPDATES.length
+  ? UPDATES.slice(0,3).map((u,i)=>updateItem(u, i===0)).join("") +
+    (UPDATES.length>3 ? `<details class="older"><summary>עדכונים קודמים (${UPDATES.length-3})</summary>${UPDATES.slice(3).map(u=>updateItem(u,false)).join("")}</details>` : "")
+  : `<div class="empty">אין עדכונים חדשים כרגע</div>`;
 
-// live
+// live + calendar
+const calLinks = () => {
+  if (!LIVE.start) return "";
+  const s = new Date(LIVE.start); if (isNaN(s)) return "";
+  const e = new Date(s.getTime() + (LIVE.minutes||60)*60000);
+  const z = d => d.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
+  const details = (LIVE.text||"") + (LIVE.link ? "\n" + LIVE.link : "");
+  const g = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent("לייב במועדון: " + LIVE.title) +
+            "&dates=" + z(s) + "/" + z(e) + "&details=" + encodeURIComponent(details);
+  const ics = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//businessclub//he","BEGIN:VEVENT","UID:"+z(s)+"@businessclub",
+    "DTSTAMP:"+z(new Date()),"DTSTART:"+z(s),"DTEND:"+z(e),"SUMMARY:לייב במועדון: "+LIVE.title,
+    "DESCRIPTION:"+details.replace(/\n/g,"\\n"),"END:VEVENT","END:VCALENDAR"].join("\r\n");
+  return `<div class="cal"><a href="${g}" target="_blank" rel="noopener">📅 ליומן גוגל</a><a href="data:text/calendar;charset=utf-8,${encodeURIComponent(ics)}" download="live.ics">📅 ליומן באייפון</a></div>`;
+};
 $("#live").innerHTML = LIVE.title ? `
   <span class="pill"><i></i>הלייב הבא</span>
   <h3>${esc(LIVE.title)}</h3>
   <p class="when">${esc(LIVE.when)}</p>
   <p>${esc(LIVE.text)}</p>
-  ${LIVE.link?`<a class="btn btn-o" href="${esc(LIVE.link)}" target="_blank" rel="noopener">לכניסה ללייב</a>`:""}` : `
+  ${LIVE.link?`<a class="btn btn-o" href="${esc(LIVE.link)}" target="_blank" rel="noopener">לכניסה ללייב</a>`:""}
+  ${calLinks()}` : `
   <span class="pill">📅 הלייב הבא</span>
   <h3>בקרוב</h3>
   <p>ברגע שייקבע מועד ללייב הבא, הוא יופיע כאן עם הקישור לכניסה.</p>`;
@@ -507,6 +651,30 @@ $("#cats").addEventListener("click", e => {
     card.classList.toggle("is-done", !!done[p]); card.querySelector(".done").setAttribute("aria-pressed", !!done[p]);
   }
 });
+
+// per-device preferences
+const pref = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch(e) { return null; } };
+
+// start checklist: hide / show
+const startSec = $("#start");
+if (pref("bc-check-hidden") === "1") startSec.classList.add("checked");
+$("#hideCheck").addEventListener("click", () => { startSec.classList.add("checked"); pref("bc-check-hidden","1"); });
+$("#showCheck").addEventListener("click", () => { startSec.classList.remove("checked"); pref("bc-check-hidden","0"); });
+
+// text size
+const SIZES = [1, 1.12, 1.25, 1.4];
+let si = Math.max(0, SIZES.indexOf(Number(pref("bc-size")) || 1));
+const applySize = () => { document.body.style.zoom = SIZES[si]; pref("bc-size", SIZES[si]); };
+if (si) applySize();
+$("#bigger").addEventListener("click", () => { if (si < SIZES.length-1) { si++; applySize(); } });
+$("#smaller").addEventListener("click", () => { if (si > 0) { si--; applySize(); } });
+
+// links that open a help answer
+document.addEventListener("click", e => {
+  const a = e.target.closest("[data-open]"); if (!a) return;
+  const d = document.getElementById(a.dataset.open); if (d) d.open = true;
+});
+if (location.hash.startsWith("#faq-")) { const d = document.querySelector(location.hash); if (d) d.open = true; }
 
 // search
 const norm = s => s.toLowerCase().replace(/[֑-ׇ'"״׳?.,:\-]/g,"").replace(/וו/g,"ו").replace(/\s+/g," ").trim();
