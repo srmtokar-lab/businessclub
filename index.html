@@ -129,8 +129,20 @@ section{padding:44px 0 8px}
 .course.is-done h4::after{content:" · סיימתי";color:var(--o3);font-size:14px;font-weight:700}
 .lessons{margin:14px 0 0;padding:12px 0 0;border-top:1px dashed var(--line);list-style:none;display:none;max-height:300px;overflow:auto}
 .course.open .lessons{display:block}
-.lessons li{display:flex;justify-content:space-between;gap:10px;padding:5px 0;font-size:15px}
-.lessons li span:last-child{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.lessons a{display:flex;justify-content:space-between;gap:10px;padding:6px 4px;font-size:15px;text-decoration:none;border-radius:8px}
+.lessons a:hover{background:#f7f1e8;color:var(--navy)}
+.lessons a span:last-child{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.att{font-style:normal;font-size:12.5px;font-weight:700;color:var(--o3);white-space:nowrap}
+
+/* materials */
+.mats{display:grid;gap:12px;grid-template-columns:1fr}
+@media(min-width:640px){.mats{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:980px){.mats{grid-template-columns:repeat(4,1fr)}}
+.mat{display:flex;gap:14px;align-items:center;padding:16px;text-decoration:none;transition:transform .2s ease}
+.mat:hover{transform:translateY(-2px)}
+.mat .doc{flex:0 0 auto;width:46px;height:56px;border-radius:8px 16px 8px 8px;background:var(--grad);color:#fff;display:grid;place-items:center;font-weight:800;font-size:12px;box-shadow:0 8px 16px -8px rgba(246,82,41,.6)}
+.mat b{display:block;font-size:17px;line-height:1.25;color:var(--ink)}
+.mat small{display:block;color:var(--muted);font-size:14px;margin-top:3px}
 .toggle{background:none;border:0;color:var(--navy);font-weight:700;padding:10px 4px;text-decoration:underline;text-underline-offset:3px}
 
 /* search results */
@@ -206,6 +218,11 @@ footer .sign{font-family:"Suez One",serif;font-size:24px;color:var(--navy);margi
       <div class="steps" id="steps"></div>
     </section>
 
+    <section id="materials">
+      <div class="sec-head"><div><h2>חוברות וצ'קליסטים</h2><p>חומרי עבודה להורדה. כל אחד נמצא בתוך השיעור שלו, מתחת לסרטון.</p></div></div>
+      <div class="mats" id="mats"></div>
+    </section>
+
     <section id="library">
       <div class="sec-head"><div><h2>כל התכנים</h2><p>לחצי על נושא כדי לסנן. כל כפתור נפתח במערכת הקורסים עם הכניסה הרגילה שלך.</p></div></div>
       <nav class="chips" id="chips" aria-label="סינון לפי נושא"></nav>
@@ -265,70 +282,91 @@ const CATS = [
 // path = החלק שאחרי my.schooler.biz/s/101498/
 const COURSES = [
   { cat:"social", name:"הפריצה שלך בסטטוס", path:"1752852490506/jfaCB-Q",
+    slugs:"jfaCB-Q 57EHkNI -_O_rOQ MtOrLWU UKxT7eo nzoLVz4 j9UuciM ZQ-EvoQ 9KYyzJc O29yhAU oe3IDPg hATg7Bc 3rt6mKU aIqINqg AwgwGtM 1nNClQM K8oeZ2U 2LwAA-E Ok6N7WM qdZvmxo cjaU-jQ jaK3pEc AlYUpmQ _VwiU34 U3vEc94 cAmCTH0 y5SHin8 XOeV5Fw 5WffXEU P-HBaY4 p8y8BAQ uT5DU88 Bk-sGyA hNmL5Vk",
     desc:"הקורס המלא על סטטוסים ווואטסאפ עסקי: איך מגדילים צפיות, יוצרים קהילה ומוכרים גם עם מעט אנשי קשר.",
-    lessons:"ברוכות הבאות~01:54; סטטוסי מדוע?~02:37; סיבה נוספת לסטטוס~00:53; איך מגדילים עוקבים~01:54; פרסום על פרסום~02:17; קבוצות פרסום~04:42; סרטון תדמית וקישור~04:15; סרטון תדמית שלי~02:31; קישור קצר~02:01; פעילויות פרסים והגרלות~03:12; מאגרים וקבוצות שונות~02:05; גיבוש קהילה~08:39; יסודות הוואטאפ חלק א~04:05; יסודות הוואטאפ חלק ב~05:25; יסודות הוואטאפ חלק ג~04:04; יסודות הוואטאפ חלק ד~02:12; וואטאפ ביזנס~07:25; הכנסת מוצר לקטלוג~02:53; קידום מודעות~02:10; וי כחול~02:47; רעיונות לתכנים~08:09; יכולת ההתמדה~10:52; לא מצליחים לדבר מול מצלמה~03:17; אז איך כן?~06:14; נראות~02:29; הנעה לפעולה~04:28; שיתופי פעולה~03:55; כללי הזהב להצלחה~15:38; לסיום~00:18; עדכון וואטאפ~01:50; 100 רעיונות לתכנים~PDF; קאנבה~01:22; יצירת קישור~; מדבקות ואווטרים~08:14" },
+    lessons:"ברוכות הבאות~01:54; סטטוסי מדוע?~02:37; סיבה נוספת לסטטוס~00:53; איך מגדילים עוקבים~01:54; פרסום על פרסום~02:17; קבוצות פרסום~04:42; סרטון תדמית וקישור~04:15; סרטון תדמית שלי~02:31; קישור קצר~02:01; פעילויות פרסים והגרלות~03:12; מאגרים וקבוצות שונות~02:05; גיבוש קהילה~08:39; יסודות הוואטאפ חלק א~04:05; יסודות הוואטאפ חלק ב~05:25; יסודות הוואטאפ חלק ג~04:04; יסודות הוואטאפ חלק ד~02:12; וואטאפ ביזנס~07:25; הכנסת מוצר לקטלוג~02:53; קידום מודעות~02:10; וי כחול~02:47; רעיונות לתכנים~08:09; יכולת ההתמדה~10:52; לא מצליחים לדבר מול מצלמה~03:17; אז איך כן?~06:14; נראות~02:29; הנעה לפעולה~04:28; שיתופי פעולה~03:55; כללי הזהב להצלחה~15:38; לסיום~00:18; עדכון וואטאפ~01:50; 100 רעיונות לתכנים~~חוברת: 100 רעיונות לתכנים וסרטונים; קאנבה~01:22; יצירת קישור~; מדבקות ואווטרים~08:14" },
   { cat:"social", name:"הפריצה שלך באינסטגרם", path:"insta/I3JTBHk",
+    slugs:"I3JTBHk KWjxBPQ FirJeGI KVwlLv8 cBGmI3g xybgs2w gLIMeXY m_S-JL8 d6nvXio 2absm4k t8GaY4Y CU9msd0 YV4c2RE dAOIexc TSzSokM 2HrS9sU KJsHL-w CH5Ij4I tFE7FKw xY-hfio KSYf7A4 bneALPU VyOW3Yo BzoJeig pzOuheo KBTw4lI TD3g_fc G8SaM0Y KT5RWZM cft_bjE OoyXEnc dC64R3s xoyCH2w x9WizLQ XGl9vM4 0kYHRiI 4yBVajw 5BvmWiU",
     desc:"מהפרופיל ועד הרילס: חוקי הסטורי, יצירת תוכן, ביו מנצח, לייבים ואיך הופכים עוקבות לקונות.",
     lessons:"ברוכות הבאות~01:50; למה אינסטגרם?~01:36; יסודות האינסטגרם~10:00; הפרופיל שלך~08:02; איך מעלים סטורי~01:13; חוקי הסטורי~05:24; סטורי פעיל~02:46; רעיונות לסטורי~03:17; איך מעלים רילס~02:11; חוקי הרילס~02:47; פוסט~02:08; איך להעביר מסר~04:34; דוגמא להעלאת ריל באפליקציה~02:00; יסודות הצילום~03:22; התמדה~03:22; יצירת תוכן~04:58; נישה ומיקוד~04:12; הנעה לפעולה~01:42; איך להניע לפעולה~02:34; ביו מנצח~04:53; יצירת קהילה~03:27; לייב~04:08; רעיונות ליצירת תוכן~02:24; איך לייצר סרטון ויראלי~01:15; איך להגדיל קהילה~04:48; איך להפוך אותם לקהל משלמים?~04:37; כמה תכנים לעלות?~01:40; חשיפה בעמוד~04:06; עקביות~03:37; אסתטיקה~01:56; עשי או אל תעשי?~05:21; גאנט שיווק~04:19; עקרונות הוויראליות~09:02; קניית עוקבים~02:36; פיצ'ר חדש~02:36; לקראת סיום~05:17; לקפוץ למים והסבר על קאנבה וגאנט שיווק~03:54; איך מעלים סאונד לסרטון ואיך משתפים~03:52" },
   { cat:"social", name:"הפריצה שלך בטיקטוק", path:"tiktok/VI2W7gE",
+    slugs:"VI2W7gE XOFFqk8 htEHiIE -abOwQY Bahl4WI nVSYxFo GEMCNwo Czhj554 FovKPeE qokkL8o 48NX9a8 pYVpu2s jb9Tg_I ZqzsUxw DnfrZK8 jPbExKk MB4VFZs FhkAEz8 XHw3cVI Q0KXaXE EDxlHDg 13L9zTM Nd8kWBM fYtncBc CvUjJ2c 4l1aXeE gFufNTs lv7ZrKE LGYdqpM O6CcLN4 isJ5HBo RllLaVQ gZ_1SYI oLNovZQ iHrXS5A",
     desc:"מאפס לטיקטוק: יסודות, צילום, טרנדים, עקרונות ויראליות, התמודדות עם תגובות, ואיך ממירים את זה לכסף.",
     lessons:"הקדמה~00:45; ברוכות הבאות~00:21; למה טיקטוק~01:34; יסודות הטיקטוק~03:04; פונקציות~01:40; איך מעלים סרטון~00:49; איך לעלות ללייב~00:55; הפרופיל~03:08; חוקים לטיקטוק~03:31; חשיפה ומעורבות~03:08; הצילום~03:22; רעיונות~04:43; סוגי תכנים~02:42; איך מעלים עוקבים~06:00; גיבוש וקהילה~04:22; הנחיות הקהילה~02:54; עקרונות ויראליות~09:02; התמדה~11:02; תשומת לב~04:15; איך ממירים את זה לכסף~06:21; ליצור חיבור~01:29; לא מצליחים לעמוד מול מצלמה~03:18; אז איך כן?~06:26; סטורי~03:40; נראות~02:33; כמה תכנים לעלות?~07:30; ביטחון~04:52; פרשנות~04:36; תגובות לא מפרגנות~06:41; טרנדים~02:41; 6 עקרונות הזהב~17:47; הנעה לפעולה~06:50; ברכת הדרך~00:44; לסיום~00:12; עריכת סרטון: סאונד, כתוביות, צבע והעלאה~03:52" },
   { cat:"social", name:"סטורי מנצח", path:"story/VqrYnso",
+    slugs:"VqrYnso 5Uu8MjQ x8Lpqys lLCs2Kc raCqbYg u2OTiyU T62_nV4",
     desc:"למה הסטורי שלך כל כך חשוב, איך בונים דמות וסיפור, ואיך מעלים צפיות ומעורבות.",
     lessons:"ברוכות הבאות~01:04; למה הסטורי שלי כל כך חשוב~07:48; איך בונים דמות~06:01; סיפור מנצח~02:56; סיפור הגיבור~08:51; העלאת הצפיות בסטורי~09:19; יצירת מעורבות~07:15" },
   { cat:"social", name:"נראות דיגיטלית", path:"1792861358629/433pzl4",
+    slugs:"433pzl4 7_Y2lfs -baeQsU 7hoXLwM zCuwWW0 Sdfw7Bk",
     desc:"קורס קצר ומרוכז: 4 סוגי תוכן, נראות באינסטגרם ובסטטוסים, טעויות נפוצות וצ'קליסט לסיום.",
-    lessons:"נראות דיגיטלית~07:01; 4 סוגי תוכן~03:45; נראות אינסטגרם וסטטוסים~03:22; סרטונים הן קונות אותך~01:18; טעויות נפוצות~04:43; צ'קליסט וסיכום~01:26" },
+    lessons:"נראות דיגיטלית~07:01; 4 סוגי תוכן~03:45; נראות אינסטגרם וסטטוסים~03:22; סרטונים הן קונות אותך~01:18; טעויות נפוצות~04:43; צ'קליסט וסיכום~01:26~צ'קליסט: הנראות שלי" },
   { cat:"social", name:"יצירת תוכן", path:"1753217796979/nlWTDJI",
+    slugs:"nlWTDJI 19Xoqf0 FJqdOGQ zRsUno0 o72wdUc",
     desc:"תוכן ויראלי, איך מביאים לקוחות מהתוכן, והחלק שכולן נתקעות בו: התמדה.",
     lessons:"יצירת תוכן ויראלי~1:03:11; איך להביא לקוחות מהתוכן שלך~18:05; התמדה ביצירת תוכן~57:20; יצירת מעורבות~07:15; נראות דיגיטלית~07:01" },
   { cat:"social", name:"עמידה מול מצלמה", path:"camara/f4N3wWU",
+    slugs:"f4N3wWU y7Nci7g pj1Xq4k WM8ZSj0 IEtTDjE 15qH1Xo D2vjvBk Ay7eSgI d8-NrNQ YC4glM8 7TrWfWE 9pBGIo4 QAUxXas 9bWbAZs zNYm7XM NoHYtI8 57tv0aM",
     desc:"להיות את, רק בטוחה יותר: אנרגיה, מיקוד המסר, סגנון דיבור, שפת גוף וחשיפה אותנטית.",
     lessons:"ברוכות הבאות~00:23; מדוע עמידה מול מצלמה?~03:55; הפער שקיים~01:14; ביטוי האנרגיה~10:36; נראות~01:50; מיקוד המסר~03:41; ביטחון עצמי~07:32; סגנון דיבור~03:44; מה עושים עם הגוף?~04:36; סיכום קצר~04:46; חשיפה אותנטית~06:32; פרמטרים להצלחה~00:27; פרמטרים להצלחה חלק 1~03:56; פרמטרים להצלחה חלק 2~01:27; פרמטרים להצלחה חלק 3~04:33; פרמטרים להצלחה חלק 4~03:15; לסיום סיומת~00:44" },
 
   { cat:"biz", name:"אסטרטגיה", path:"1753216125775/yepKSmU",
+    slugs:"yepKSmU _GnrN5s LxvLvN4 1E0WemQ UJr1eLw yNiXEss u7bWwBs J5HCra8",
     desc:"הבסיס של עסק שעובד: משפך שיווק, הצעה שאי אפשר לסרב לה, סל מוצרים ותוכנית ל-90 יום.",
-    lessons:"אסטרטגיה עסקית~33:30; משפך שיווק~12:04; איך לייצר עסק בצורה נכונה~39:05; הצעה שאי אפשר לסרב לה~23:16; סל מוצרים ופיתוח מוצר~28:25; לבנות מנוע הכנסות יציב~14:57; רמות מודעות~13:07; תוכנית ל-90 יום~16:22" },
+    lessons:"אסטרטגיה עסקית~33:30; משפך שיווק~12:04; איך לייצר עסק בצורה נכונה~39:05; הצעה שאי אפשר לסרב לה~23:16; סל מוצרים ופיתוח מוצר~28:25; לבנות מנוע הכנסות יציב~14:57; רמות מודעות~13:07; תוכנית ל-90 יום~16:22~חוברת: חוברת 90 יום" },
   { cat:"biz", name:"איך להכפיל את העסק", path:"1753219192863/Kye-kPc",
+    slugs:"Kye-kPc v5TpdA4 9M3Oxls 9sG5Ha8 mfBUV6k",
     desc:"לדייק את המוצר, לבנות עסק רווחי ולעבור מכיבוי שריפות לניהול אמיתי.",
     lessons:"איך להכפיל את העסק~45:57; איך לדייק את המוצר~37:48; איך לייצר עסק רווחי~38:41; איך לעבור מניהול שריפות לניהול העסק~48:23; התמדה ביצירת תכנים ברשתות החברתיות~57:20" },
   { cat:"biz", name:"שיווק", path:"1753218890463/JkeXhiI",
+    slugs:"JkeXhiI 2RNyYvM OpY38kg B8SdsOw HZXSAlA N9NdwkQ",
     desc:"מערכת שיווק פשוטה, מיתוג אישי חזק, ואיך משווקים גם בימים שאין כוח.",
     lessons:"שיווק לבעלות עסקים~1:16:50; התמדה בשיווק~15:45; שיווק, מכירות ושירות~14:35; מערכת שיווק פשוטה~28:18; מיתוג אישי חזק~23:02; איך משווקים גם כשאין כוח~14:48" },
   { cat:"biz", name:"מכירות ועוד", path:"1773329610046/hbQU9JE",
+    slugs:"hbQU9JE whAA9YA HU10wtc",
     desc:"למה מכירות עושות כיווץ בבטן, ואיך מוכרים ממקום גבוה ונעים.",
     lessons:"למה מכירות עושות לנו כיווץ בבטן~06:20; מכירות מלמעלה~24:03; הלקוחה הבאה שלך~10:24" },
   { cat:"biz", name:"לקוחות וקהילה", path:"1753216892727/KfRcos4",
+    slugs:"KfRcos4 fSAD5-w 69b-Kqk Wo5rjQ8 ZAQub-8",
     desc:"קהילה חזקה, אווטאר לקוחה, ניהול קבוצות וואטסאפ וחוויית לקוחה שמחזירה לקוחות.",
-    lessons:"קהילה חזקה~1:23:11; אווטאר לקוח~39:09; ניהול קבוצות בוואטאפ~57:59; מסע לקוח וחוויית לקוח~23:48; אווטאר לקוח: איך לדייק את קהל היעד~13:07" },
+    lessons:"קהילה חזקה~1:23:11; אווטאר לקוח~39:09; ניהול קבוצות בוואטאפ~57:59; מסע לקוח וחוויית לקוח~23:48; אווטאר לקוח: איך לדייק את קהל היעד~13:07~חוברת עבודה: אווטאר לקוח" },
   { cat:"biz", name:"נהלי עבודה", path:"1753217601398/P80Sekk",
+    slugs:"P80Sekk nesYDgk stu29fI",
     desc:"סדר בעסק: נהלים, טעויות סמויות ואיפה צוואר הבקבוק שלך.",
     lessons:"נהלי עבודה~39:04; טעויות סמויות~20:21; צוואר הבקבוק בעסק~16:39" },
   { cat:"biz", name:"פיננסים", path:"1753217657352/Olb8Mvg",
+    slugs:"Olb8Mvg",
     desc:"מפת זרימת הכסף בעסק, כדי לדעת סוף סוף לאן הכסף הולך.",
     lessons:"מפת זרימת הכסף בעסק~18:58" },
 
   { cat:"mind", name:"מיינדסט והתפתחות אישית", path:"1753218367041/oLxA8qk",
+    slugs:"oLxA8qk 1a-8RZg umfS2a0 F-bYAOo 9mKdDt8 cMOrG74",
     desc:"מיינדסט של בעלת עסק, כסף בראש וכסף בכיס, שחרור ריצוי, קבלת החלטות ותודעת שפע.",
     lessons:"מיינדסט של בעלת עסק~37:22; שידור מיוחד למצב חירום~1:02:27; כסף בראש, כסף בכיס~25:33; איך לשחרר דפוסי ריצוי~25:20; קבלת החלטות~18:00; חשיבה מצומצמת מול תודעת שפע~17:59" },
   { cat:"mind", name:"סגנונות תקשורת", path:"1753219821366/fK-vbQ0",
+    slugs:"fK-vbQ0",
     desc:"הרצאה על סגנונות תקשורת, כדי להבין לקוחות (ואנשים בכלל) טוב יותר.",
     lessons:"סגנונות תקשורת~36:50" },
   { cat:"mind", name:"פודקאסט", path:"1753219923004/9tnW1Js",
+    slugs:"9tnW1Js VrmLGRo M0_MbOc ThJB6V0 H3dbWmo X5Wjpc8 QL8HPpo IuA-lew 2uzhUEA",
     desc:"שיחות אמיתיות על בית, קריירה וילדים, חסמים, הרגלים, מוטיבציה וחלומות.",
     lessons:"איך הכל התחיל~19:59; נשים בעידן המודרני~28:35; איך מתמודדים עם חסמים~11:39; איך מרוויחים כסף ממה שאת אוהבת לעשות~05:52; בית, קריירה וילדים~27:31; איך מטמיעים הרגלים~10:30; מוטיבציה: איך שומרים על אנרגיה~25:23; החלום שלי ואני~16:17; פרק מארח עם אירית~49:00" },
 
   { cat:"talks", name:"כנס סודות השיווק", path:"1753651933633-2/nXL6THI",
+    slugs:"nXL6THI mOi3drk kCJygtA SCvg5Lo LJPB23E cQ2MSZQ EwEPT-w PvzZkhw ItWVzUg GWIX700",
     desc:"הכנס המלא: ויראליות, שיווק מול פרסום, תמהיל ומשפכי שיווק, מוצרים ומסלולים, וטעויות נפוצות.",
     lessons:"מבוא~09:21; ויראליות ברשת~21:52; שיווק או פרסום~09:30; הוצאות שיווק~10:54; תמהיל השיווק~07:00; משפכי שיווק~05:42; מה עוצר אותך?~05:42; מוצרים ומסלולים~11:27; מכירות ושיווק~09:57; טעויות נפוצות~09:20" },
   { cat:"talks", name:"בונוסים", path:"1753217342985/9wUKWso",
+    slugs:"9wUKWso",
     desc:"הרצאה מיוחדת: איך לייצב את העסק בזמן מלחמה.",
     lessons:"איך לייצב את העסק בזמן מלחמה~1:02:27" },
 
   { cat:"tools", name:"קאנבה", path:"1753216240605/FtwV6Wc",
+    slugs:"FtwV6Wc JYFhY2c sxeLtr8 R5QuYPA AvCgCfM SAlRpn4",
     desc:"קאנבה מהנייד, מצגות, מוקאפים, כרטיס ביקור, קוד QR, ואפילו אתר או דף נחיתה לבד.",
     lessons:"קאנבה בסיסי מהנייד~01:22; איך בונים מצגת בקאנבה~18:28; מוקאפ~23:26; איך בונים אתר תדמית או דף נחיתה לגמרי לבד~44:14; איך בונים כרטיס ביקור~18:25; איך מצרפים קוד QR~06:32" },
   { cat:"tools", name:"אפליקציות", path:"1753217221845/EHXB6OU",
+    slugs:"EHXB6OU",
     desc:"אפליקציות שעושות לך את החיים קלים, כמו שינוי פורמט לסרטון.",
     lessons:"שינוי פורמט ב-Clipchamp~07:46" }
 ];
@@ -344,10 +382,15 @@ const fmt = s => { const h=Math.floor(s/3600), m=Math.round((s%3600)/60); if(!h)
 
 COURSES.forEach(c => {
   c.url = BASE + c.path;
-  c.items = c.lessons.split(";").map(x => x.trim()).filter(Boolean).map(x => { const [t,d=""] = x.split("~"); return {t:t.trim(), d:d.trim()}; });
+  const sl = (c.slugs||"").split(" ");
+  c.items = c.lessons.split(";").map(x => x.trim()).filter(Boolean).map((x,n) => {
+    const [t,d="",f=""] = x.split("~");
+    return {t:t.trim(), d:d.trim(), f:f.trim(), url: sl[n] ? BASE + c.path.split("/")[0] + "/" + sl[n] : c.url};
+  });
   c.sec = c.items.reduce((a,i)=>a+toSec(i.d),0);
-  c.pdf = c.items.filter(i=>i.d==="PDF").length;
+  c.files = c.items.filter(i=>i.f);
 });
+const MATERIALS = COURSES.flatMap(c => c.files.map(i => ({...i, course:c})));
 
 // stats
 const totalSec = COURSES.reduce((a,c)=>a+c.sec,0);
@@ -384,6 +427,13 @@ $("#steps").innerHTML = START.map(n => COURSES.find(c=>c.name===n)).filter(Boole
     <h3>${esc(c.name)}</h3><p>${esc(c.desc)}</p><span class="len">${c.items.length} שיעורים · ${fmt(c.sec)}</span>
   </a>`).join("");
 
+// materials
+$("#mats").innerHTML = MATERIALS.map(m => `
+  <a class="card mat" href="${m.url}" target="_blank" rel="noopener">
+    <span class="doc" aria-hidden="true">PDF</span>
+    <span><b>${esc(m.f.includes(":") ? m.f.split(":").slice(1).join(":").trim() : m.f)}</b><small>${esc(m.f.split(":")[0])} · בשיעור "${esc(m.t)}" (${esc(m.course.name)})</small></span>
+  </a>`).join("");
+
 // done state (per device)
 const DKEY = "bc-done";
 let done = {};
@@ -400,13 +450,13 @@ const courseCard = c => `
     <div class="facts">
       <span class="fact">${c.items.length} ${c.items.length===1?"הרצאה":"שיעורים"}</span>
       ${c.sec?`<span class="fact">${fmt(c.sec)}</span>`:""}
-      ${c.pdf?`<span class="fact pdf">כולל חוברת PDF</span>`:""}
+      ${c.files.map(i=>`<span class="fact pdf">📎 ${esc(i.f.split(":")[0])}</span>`).join("")}
     </div>
     <div class="actions">
       <a class="btn btn-o" href="${c.url}" target="_blank" rel="noopener">לצפייה</a>
       ${c.items.length>1?`<button class="toggle" aria-expanded="false">מה יש בפנים?</button>`:""}
     </div>
-    <ul class="lessons">${c.items.map(i=>`<li><span>${esc(i.t)}</span><span>${i.d==="PDF"?"חוברת":esc(i.d)}</span></li>`).join("")}</ul>
+    <ul class="lessons">${c.items.map(i=>`<li><a href="${i.url}" target="_blank" rel="noopener"><span>${esc(i.t)}${i.f?` <em class="att">📎 ${esc(i.f.split(":")[0])}</em>`:""}</span><span>${esc(i.d)}</span></a></li>`).join("")}</ul>
   </article>`;
 
 $("#cats").innerHTML = CATS.map(cat => {
@@ -451,12 +501,12 @@ $("#q").addEventListener("input", e => {
   const hits = [];
   COURSES.forEach(c => {
     if (norm(c.name).includes(q) || norm(c.desc).includes(q)) hits.push({c, title:c.name, sub:"קורס שלם · "+c.items.length+" שיעורים", score:0});
-    c.items.forEach(i => { if (norm(i.t).includes(q)) hits.push({c, title:i.t, sub:"בתוך: "+c.name+(i.d&&i.d!=="PDF"?" · "+i.d:""), score:1}); });
+    c.items.forEach(i => { if (norm(i.t).includes(q) || norm(i.f).includes(q)) hits.push({c, url:i.url, title:i.t, sub:"בתוך: "+c.name+(i.d?" · "+i.d:"")+(i.f?" · 📎 "+i.f:""), score:i.f&&norm(i.f).includes(q)?0.5:1}); });
   });
   hits.sort((a,b)=>a.score-b.score);
   $("#resCount").textContent = hits.length ? `${hits.length} תוצאות עבור "${raw}"` : "";
   $("#hits").innerHTML = hits.length ? hits.slice(0,60).map(h=>`
-    <a class="hit" href="${h.c.url}" target="_blank" rel="noopener"><div><b>${raw.length&&h.title.includes(raw)?hl(h.title,raw):esc(h.title)}</b><small>${esc(h.sub)}</small></div><span class="go">לצפייה ←</span></a>`).join("")
+    <a class="hit" href="${h.url||h.c.url}" target="_blank" rel="noopener"><div><b>${raw.length&&h.title.includes(raw)?hl(h.title,raw):esc(h.title)}</b><small>${esc(h.sub)}</small></div><span class="go">לצפייה ←</span></a>`).join("")
     : `<div class="empty">לא מצאתי משהו עם "${esc(raw)}". נסי מילה אחרת, או תכתבי לי ואולי זה הנושא של ההרצאה הבאה 😉</div>`;
 });
 </script>
