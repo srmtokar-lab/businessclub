@@ -89,6 +89,17 @@ section{padding:44px 0 8px}
 .btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}
 .live .btn{margin-top:12px}
 
+/* whatsapp */
+.wa{margin-top:16px;display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:var(--radius);background:#e9fbef;border:1.5px solid #bdeccb;text-decoration:none;color:var(--ink);transition:transform .2s ease}
+.wa:hover{transform:translateY(-2px)}
+.wa-ico{flex:0 0 auto;width:48px;height:48px;border-radius:14px;background:#25D366;color:#fff;display:grid;place-items:center}
+.wa-ico svg{width:28px;height:28px}
+.wa-txt{flex:1;min-width:0}
+.wa-txt b{display:block;font-size:19px;font-weight:800}
+.wa-txt small{display:block;color:var(--muted);font-size:15px;margin-top:2px}
+.wa-go{flex:0 0 auto;font-weight:800;color:#128C4A}
+@media(max-width:560px){.wa{flex-wrap:wrap}.wa-go{width:100%;text-align:center;background:#25D366;color:#fff;border-radius:12px;padding:10px}}
+
 /* start here */
 .steps{display:grid;gap:14px;grid-template-columns:1fr;counter-reset:s}
 @media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr)}}
@@ -211,6 +222,11 @@ footer .sign{font-family:"Suez One",serif;font-size:24px;color:var(--navy);margi
         <div class="card updates" id="updates"></div>
         <div class="card live" id="live"></div>
       </div>
+      <a class="wa" id="waLink" target="_blank" rel="noopener">
+        <span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg></span>
+        <span class="wa-txt"><b>הקבוצה שלנו בוואטסאפ</b><small>לשאול, להתייעץ, לשתף ולפרסם. נכנסים עם הפרטים של מערכת הקורסים, ושם מחכה הקישור.</small></span>
+        <span class="wa-go">להצטרפות ←</span>
+      </a>
     </section>
 
     <section id="start">
@@ -250,6 +266,9 @@ footer .sign{font-family:"Suez One",serif;font-size:24px;color:var(--navy);margi
    ============================================================ */
 
 const SCHOOL = "https://my.schooler.biz/s/101498/bundles";
+
+// הקבוצה בוואטסאפ: הקישור עצמו נמצא בתוך שיעור ב-Skooler, כדי שרק חברות מחוברות יגיעו אליו
+const WHATSAPP_LESSON = "https://my.schooler.biz/s/101498/1753217342985/nDMCYo8";
 
 // עדכונים חשובים. החדש למעלה. link הוא רשות.
 const UPDATES = [
@@ -357,9 +376,9 @@ const COURSES = [
     desc:"הכנס המלא: ויראליות, שיווק מול פרסום, תמהיל ומשפכי שיווק, מוצרים ומסלולים, וטעויות נפוצות.",
     lessons:"מבוא~09:21; ויראליות ברשת~21:52; שיווק או פרסום~09:30; הוצאות שיווק~10:54; תמהיל השיווק~07:00; משפכי שיווק~05:42; מה עוצר אותך?~05:42; מוצרים ומסלולים~11:27; מכירות ושיווק~09:57; טעויות נפוצות~09:20" },
   { cat:"talks", name:"בונוסים", path:"1753217342985/9wUKWso",
-    slugs:"9wUKWso",
-    desc:"הרצאה מיוחדת: איך לייצב את העסק בזמן מלחמה.",
-    lessons:"איך לייצב את העסק בזמן מלחמה~1:02:27" },
+    slugs:"9wUKWso nDMCYo8",
+    desc:"הרצאה מיוחדת: איך לייצב את העסק בזמן מלחמה, וגם הכניסה לקבוצת הוואטסאפ שלנו.",
+    lessons:"איך לייצב את העסק בזמן מלחמה~1:02:27; הקבוצה שלנו בוואטסאפ~" },
 
   { cat:"tools", name:"קאנבה", path:"1753216240605/FtwV6Wc",
     slugs:"FtwV6Wc JYFhY2c sxeLtr8 R5QuYPA AvCgCfM SAlRpn4",
@@ -401,6 +420,7 @@ $("#stats").innerHTML = [
   [Math.floor(totalSec/3600)+"+", "שעות של ידע"]
 ].map(([b,s])=>`<div class="stat"><b dir="ltr">${b}</b><span>${s}</span></div>`).join("");
 $("#schoolLink").href = SCHOOL;
+$("#waLink").href = WHATSAPP_LESSON;
 
 // updates
 $("#updates").innerHTML = UPDATES.length ? UPDATES.map(u=>`
